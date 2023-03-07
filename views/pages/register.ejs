@@ -1,0 +1,37 @@
+<%-include('../includes/user/header.ejs') %>
+
+</head>
+<body>
+  <%-include('../includes/user/navbar.ejs') %>
+ 
+<form action="/sign-up" method="post">
+  <h1 class="my-4">Form Validation</h1>
+    <div class="mb-3 mt-3">
+      <label for="uname" class="form-label">Username:</label>
+      <input type="email" class="form-control" id="uname" placeholder="Enter username" name="Email" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="mb-3">
+      <label for="pwd" class="form-label">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="Password" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="mb-3">
+      <label for="pwd" class="form-label">Confirm Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Confirm Password" name="Confirm Password" required>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="myCheck" name="remember" required>
+      <label class="form-check-label" for="myCheck">I agree to the terms and conditions.</label>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Check this checkbox to continue.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  <%-include('../includes/user/footer.ejs') %>
+</body>
