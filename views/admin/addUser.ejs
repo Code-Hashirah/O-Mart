@@ -1,0 +1,188 @@
+<%- include ('../includes/admin/adminHeader.ejs') %>
+</head>
+<body class="hold-transition register-page">
+
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+  </div>
+  
+ <div class="row w-100">
+ 
+  <div class="col-4">
+    <aside class="main-sidebar sidebar-dark-primary elevation-4 w-75">
+      <!-- Brand Logo -->
+      <a href="/admin-dashboard" class="brand-link">
+        <img src="" alt="Admin" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">O-MART</span>
+      </a>
+  
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="d-block">Kabir O-MART</a>
+          </div>
+        </div>
+  
+  
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+            <li class="nav-item menu-open">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Users
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="/admin-dashboard" class="nav-link">
+                    <i class="far fa-circle nav-icon active"></i>
+                    <p> Dashboard</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/admin-add-user" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add User</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/admin-manage-user" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Manage Users</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+           
+          </ul>
+  
+          <!-- Products sidebar-->
+          <ul class="nav nav-pills nav-sidebar flex-column"  role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+            <li class="nav-item menu-open">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                 Products
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+               
+                <li class="nav-item">
+                  <a href="/admin-add-product" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Product</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/admin-manage-product" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Manage Products</p>
+                  </a>
+                </li>
+              </ul>
+            </li>             
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+  </div>
+  <div class="col-7">
+    <div class="register-box w-75">
+      <div class="card card-outline card-primary">
+        <div class="card-header text-center">
+          <a href="/admin-dashboard" class="h1"><b>Admin::</b>O-MART</a>
+        </div>
+        <div class="card-body">
+          <p class="login-box-msg">Register a new user</p>
+    
+          <form action="/admin-add-user" method="post">
+    
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Email" name="Email">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+    
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="Password" name="Password">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+    
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="Retype password">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+    
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Full name" name="Name">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Image" name="Image">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+    
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Phone number" name="Phone">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Role</label>
+              <select class="form-control select2" style="width: 100%;" name="Role">
+                <option selected="selected">User</option>
+                <option>Admin</option>
+              </select>
+            </div>
+         
+            <div class="row">
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+ </div>
+
+<%- include ('../includes/admin/adminFooter.ejs') %>
+</body>

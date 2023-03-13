@@ -6,26 +6,75 @@
  
 <form action="/sign-up" method="post">
   <h1 class="my-4">Form Validation</h1>
+  <!-- <% if(errorMessage.length > 0){
+    %>
+ <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Ooops!</strong> 
+    <% for(let error of errorMessage){
+     %>
+       <div><%= error.msg %></div>
+
+    <%}%>
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<%} %> -->
+<!-- <p> <%=JSON.stringify(errorMessage) %></p> -->
     <div class="mb-3 mt-3">
       <label for="uname" class="form-label">Username:</label>
-      <input type="email" class="form-control" id="uname" placeholder="Enter username" name="Email" required>
-      <div class="valid-feedback">Valid.</div>
-      <div class="invalid-feedback">Please fill out this field.</div>
+      <input type="email" class="form-control" id="uname" placeholder="Enter username" name="Email" >
+      <div role="alert"><% if (errorMessage.length!=0){
+        for(let error of errorMessage){
+          if(error.param=="Email"){ %>
+             <div><%= error.msg %></div>
+        <%  }
+          
+           else{ %>
+              <p class="alert alert-primary alert-dismissible fade show" role="alert">Valid</p>
+         <%  }
+          }
+      } %>
+      </div>
+      <!-- <div class="invalid-feedback">Please fill out this field.</div> -->
     </div>
     <div class="mb-3">
       <label for="pwd" class="form-label">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="Password" required>
-      <div class="valid-feedback">Valid.</div>
-      <div class="invalid-feedback">Please fill out this field.</div>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" value="<%= oldInput.length >0 && oldInput[0].email ? oldInput[0].email : ''%>" name="Password" >
+      <div role="alert"><% if (errorMessage.length!=0){
+        for(let error of errorMessage){
+          if(error.param=="Password"){ %>
+             <div><%= error.msg %></div>
+        <%  }
+          
+           else{ %>
+              <p class="alert alert-primary alert-dismissible fade show" role="alert">Valid</p>
+         <%  }
+          }
+      } %>
+      </div>
+      <!-- <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div> -->
     </div>
     <div class="mb-3">
       <label for="pwd" class="form-label">Confirm Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Confirm Password" name="Confirm Password" required>
-      <div class="valid-feedback">Valid.</div>
-      <div class="invalid-feedback">Please fill out this field.</div>
+      <input type="password" class="form-control" id="pwd" placeholder="Confirm Password" name="ConfirmPassword" >
+      <div role="alert"><% if (errorMessage.length!=0){
+        for(let error of errorMessage){
+          if(error.param=="ConfirmPassword"){ %>
+             <div><%= error.msg %></div>
+        <%  }
+          
+           else{ %>
+              <p class="alert alert-primary alert-dismissible fade show" role="alert">Valid</p>
+         <%  }
+          }
+      } %>
+      </div>
+      <!-- <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div> -->
     </div>
     <div class="form-check mb-3">
-      <input class="form-check-input" type="checkbox" id="myCheck" name="remember" required>
+      <input class="form-check-input" type="checkbox" id="myCheck" name="remember" >
       <label class="form-check-label" for="myCheck">I agree to the terms and conditions.</label>
       <div class="valid-feedback">Valid.</div>
       <div class="invalid-feedback">Check this checkbox to continue.</div>

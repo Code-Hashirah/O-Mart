@@ -24,6 +24,14 @@ const user=sequelize.define('users', {
     password:{
         type:DataTypes.STRING(50),
         allowNull:false,
+    },
+    image:{
+        type:DataTypes.STRING(70),
+        allowNull:true,
+    },
+    phone:{
+        type:DataTypes.INTEGER(11),
+        allowNull:true,
     }
 });
 
