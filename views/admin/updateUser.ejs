@@ -8,12 +8,12 @@
   
  <div class="row w-100">
  
-  <div class="col-3">
+  <div class="col-4">
     <aside class="main-sidebar sidebar-dark-primary elevation-4 w-75">
-      <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
-        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Admin</span>
+      
+      <a href="/admin-dashboard" class="brand-link">
+        <img src="" alt="Admin" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">O-MART</span>
       </a>
   
       <!-- Sidebar -->
@@ -24,7 +24,7 @@
             <img src="" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Kabir</a>
+            <a href="#" class="d-block">Kabir O-MART</a>
           </div>
         </div>
   
@@ -61,6 +61,13 @@
                     <p>Manage Users</p>
                   </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="/admin-manage-user" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Update User</p>
+                    </a>
+                  </li>
               </ul>
             </li>
            
@@ -79,6 +86,7 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
+               
                 <li class="nav-item">
                   <a href="/admin-add-product" class="nav-link ">
                     <i class="far fa-circle nav-icon"></i>
@@ -100,66 +108,71 @@
       <!-- /.sidebar -->
     </aside>
   </div>
-  <div class="col-8">
-    <div class=" w-100">
+  <div class="col-7">
+    <div class="w-75">
       <div class="card card-outline card-primary">
         <div class="card-header text-center">
-          <!-- <a href="/admin-dashboard" class="h1"><b>Admin</b>Dashboard</a> -->
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title"> Registered Product List</h3>
+          <a href="/admin-dashboard" class="h1"><b>Admin::</b>O-MART</a>
+        </div>
+        <div class="card-body">
+          <p class="login-box-msg">Update a user</p>
+    
+          <form action="/admin-update-user" method="post">
+    <input type="hidden" name="ID" value="<%= Person.id %>">
+            <div class="input-group mb-3">
+              <input type="email" class="form-control"  name="Email" value="<%=Person.email %>">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped" style="width:100% ;">
-                <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Brand</th>
-                  <th>Description</th>
-                  <th>Image</th>
-                  <th>Discount</th>
-                  <th>Category</th>
-                  <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                  <%  if(Products.length>0){
-                        for(let Items of Products){  %>
-                            <tr>
-                                <td><%= Items.id %></td>
-                                <td><%= Items.item %></td>
-                                <td><%= Items.price %></td>
-                                <td><%= Items.brand %></td>
-                                <td><%= Items.description%></td>
-                                <td><img src="<%= Items.image %>" alt="image"></td>
-                                <td><%= Items.discount %></td>
-                                <td><%= Items.category %></td>
-                                <td>
-                                  
-                                       <a href="/admin-update/<%= Items.id %>"> <i class="fas fa-upload"></i>  </a>
-                                     
-                                    
-                                        <form action="/admin-delete" method="post">
-                                            <button type="submit" class="btn btn-danger"><i class="fas fa-burn"></i></button>
-                                        </form>
-                            </td>
-                              </tr>
-                <%     }
-                    }  %>
-                
-               
-                </tfoot>
-              </table>
+    
+    
+            <div class="input-group mb-3">
+              <input type="text" class="form-control"  name="Name" value="<%=Person.name %>">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
             </div>
-            <!-- /.card-body -->
-          </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control"  name="Image" value="<%=Person.image %>">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+    
+            <div class="input-group mb-3">
+              <input type="text" class="form-control"  name="Phone" value="<%=Person.phone %>">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Role</label>
+              <select class="form-control select2" style="width: 100%;" name="Role" value="<%=Person.phone %>">
+                <option selected="selected">User</option>
+                <option>Admin</option>
+              </select>
+            </div>
+         
+            <div class="row">
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
  </div>
-</div>
+
 <%- include ('../includes/admin/adminFooter.ejs') %>
 </body>

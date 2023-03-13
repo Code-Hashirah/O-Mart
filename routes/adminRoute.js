@@ -6,7 +6,11 @@ router.post('/admin-add-user',adminController.addUser)
 
 router.get('/admin-dashboard',adminController.adminDash)
 
+router.get('/admin-manage-user', adminController.manageUser)
 
+router.post('/admin-delete-user', adminController.deleteUser)
 
+router.get('/admin-update-user/:id',adminController.updateUserPage)
+router.post('/admin-update-user',adminController.updateUser)
 
 module.exports=router;
