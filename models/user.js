@@ -22,7 +22,7 @@ const user=sequelize.define('users', {
         allowNull:false,
     },
     password:{
-        type:DataTypes.STRING(50),
+        type:DataTypes.STRING(100),
         allowNull:false,
     },
     image:{
@@ -32,7 +32,9 @@ const user=sequelize.define('users', {
     phone:{
         type:DataTypes.INTEGER(11),
         allowNull:true,
-    }
+    },
+    resetToken: DataTypes.STRING,
+    resetTokenExpiration: DataTypes.DATE
 });
 
 module.exports=user

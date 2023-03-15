@@ -50,8 +50,8 @@ exports.deleteUser=(req,res)=>{
 
 exports.updateUserPage=(req,res)=>{
     const id=req.params.id;
-    User.findByPk(id).then(users=>{
-      return  res.render('admin/updateUser', {title:"Update User", Person:users})
+    return  User.findByPk(id).then(users=>{
+        res.render('admin/updateUser', {title:"Update User", Person:users})
     })
     .catch(err=>{
         console.log(err)

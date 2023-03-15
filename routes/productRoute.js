@@ -5,6 +5,9 @@ router.post('/admin-add-product', productController.addProduct)
 
 router.get('/admin-manage-product', productController.manageProduct);
 
+router.get('/admin-update-product/:id',productController.updateProductPage);
+router.post('/admin-update-product', productController.updateProduct)
+
 
 
 

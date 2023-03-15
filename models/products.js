@@ -22,7 +22,7 @@ const product=sequelize.define('products', {
         allowNull:true,
     },
     description:{
-        type:DataTypes.STRING(50),
+        type:DataTypes.STRING(200),
         allowNull:false,
     },
     image:{

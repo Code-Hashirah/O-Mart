@@ -2,9 +2,10 @@
 </head>
 <body class="hold-transition register-page">
 
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div>
+  <!-- <div class="preloader flex-column justify-content-center align-Persons-center">
+    <h3 class="animation__wobble" style="text-align: center;"> <strong>O-Mart</strong> </h3>
+    <!-- <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60"> -->
+  </div> -->
   
  <div class="row w-100">
  
@@ -139,10 +140,10 @@
                                 <td><%= Items.category %></td>
                                 <td>
                                   
-                                       <a href="/admin-update/<%= Items.id %>"> <i class="fas fa-upload"></i>  </a>
+                                       <a href="/admin-update-product/<%= Items.id %>" class="btn btn-warning"> <i class="fas fa-eye"></i>  </a>
                                      
                                     
-                                        <form action="/admin-delete" method="post">
+                                        <form action="/admin-delete" method="post" class="my-3">
                                             <button type="submit" class="btn btn-danger"><i class="fas fa-burn"></i></button>
                                         </form>
                             </td>

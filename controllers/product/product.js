@@ -25,3 +25,28 @@ exports.manageProduct=(req,res)=>{
         res.render('products/manageProduct',{Products:product, title:"Manage Products"})
     })
 }
+
+exports.updateProductPage=(req,res)=>{
+    let id=req.params.id;
+    Product.findByPk(id).then(products=>{
+        res.render('products/updateProduct',{title:"Update product", Item:products})
+    })
+}
+
+exports.updateProduct=(req,res)=>{
+    const {Id,Item, Price, Brand, Description, Image, Discount, Category}=req.body;
+    Product.findByPk(Id).then(Prod=>{
+        Prod.item=Item,
+        Prod.brand=Brand,
+        Prod.description=Description,
+        Prod.image=Image,
+        Prod.discount=Discount,
+        Prod.category=Category
+        return Prod.save()
+    }).then(product=>{
+    return    res.redirect('/admin-manage-product')
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+}

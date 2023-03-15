@@ -19,10 +19,41 @@ router.post('/sign-up',[
 // sign in route 
 router.get('/sign-in',authController.signInPage)
 router.post('/sign-in',[
-    check('Email').notEmpty().withMessage('Your email is required  to login').isEmail().trim(),
+    check('Email').notEmpty().withMessage('Your email is required  to login').isEmail(),
     check('Password').notEmpty().withMessage('Password cannot be empty')
 ],authController.signIn)
 
 router.get('/',authController.dashBoard)
+
+// reset passwor route 
+router.get('/reset-password',authController.resetPasswordPage)
+
+router.post('/reset-password',[
+    check('Email').notEmpty().withMessage('Email is required').isEmail().withMessage('Invalid email format').normalizeEmail(),
+    check('OldPassword').notEmpty().withMessage('Password is required'),
+    check('NewPassword').notEmpty().withMessage('Field cannot be blank').custom((value, {req})=>{
+        if(value===req.body.OldPassword){
+            throw new Error('You cannot use the same password again')
+        }
+        return true;
+    }).isAlphanumeric().withMessage('Password must contain alphanumeric characters').isLength({min:6}).withMessage('New password must be six or more characters long'),
+    check('ConfirmPassword').custom((value, {req})=>{
+        if(value!==req.body.NewPassword){
+            throw new Error('Pasword does not match')
+        }
+        return true;
+    }).notEmpty().withMessage('Filed is required')
+],authController.resetPassword)
+
+// forgot password route 
+router.get('/forgot-password',authController.forgotPasswordPage)
+
+router.post('/forgot-password',[
+    check('Email').notEmpty().withMessage('Email cannot be empty').isEmail().withMessage('Invalid format, check it again')
+], authController.forgotPasswordPage)
+
+
+router.get('/retrieve-password/:token',authController.retrievePasswordPage)
+router.post('/retrieve-password',authController.retrievePassword)
 
 module.exports=router;

@@ -21,17 +21,15 @@
 <%} %> -->
 <!-- <p> <%=JSON.stringify(errorMessage) %></p> -->
     <div class="mb-3 mt-3">
-      <label for="uname" class="form-label">Username:</label>
-      <input type="email" class="form-control" id="uname" placeholder="Enter username" name="Email" >
+      <label for="uname" class="form-label">Email:</label>
+      <input type="email" class="form-control" id="uname" placeholder="Enter email" name="Email" >
       <div role="alert"><% if (errorMessage.length!=0){
         for(let error of errorMessage){
           if(error.param=="Email"){ %>
-             <div><%= error.msg %></div>
+             <div class="text-danger"><%= error.msg %></div>
         <%  }
           
-           else{ %>
-              <p class="alert alert-primary alert-dismissible fade show" role="alert">Valid</p>
-         <%  }
+           
           }
       } %>
       </div>
@@ -39,16 +37,14 @@
     </div>
     <div class="mb-3">
       <label for="pwd" class="form-label">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" value="<%= oldInput.length >0 && oldInput[0].email ? oldInput[0].email : ''%>" name="Password" >
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" value="<%= oldInput.length >0 && oldInput[0].Password? oldInput[0].Password : ''%>" name="Password" >
       <div role="alert"><% if (errorMessage.length!=0){
         for(let error of errorMessage){
           if(error.param=="Password"){ %>
-             <div><%= error.msg %></div>
+             <div class="text-danger"><%= error.msg %></div>
         <%  }
           
-           else{ %>
-              <p class="alert alert-primary alert-dismissible fade show" role="alert">Valid</p>
-         <%  }
+           
           }
       } %>
       </div>
@@ -61,12 +57,10 @@
       <div role="alert"><% if (errorMessage.length!=0){
         for(let error of errorMessage){
           if(error.param=="ConfirmPassword"){ %>
-             <div><%= error.msg %></div>
+             <div class="text-danger"><%= error.msg %></div>
         <%  }
           
-           else{ %>
-              <p class="alert alert-primary alert-dismissible fade show" role="alert">Valid</p>
-         <%  }
+           
           }
       } %>
       </div>

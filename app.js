@@ -34,12 +34,13 @@ app.use(authRoute);
 app.use(AdminRoute);
 app.use(UserRoute);
 app.use(ProductRoute);
-app.use((req,res)=>{
+app.use((req, res, next)=>{
     res.locals.isLoggedIn=req.session.isLoggedIn
-    res.locals.User
+    res.locals.User=req.session.user
+    next()
 })
 // Listen to port 
-// Product.sync({force:true})
+// User.sync({alter:true})
 sequelize.sync().then(()=>{
     app.listen(3001, ()=>{
         console.log('Connected to port 3001')
