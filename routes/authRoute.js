@@ -25,6 +25,8 @@ router.post('/sign-in',[
 
 router.get('/',authController.dashBoard)
 
+router.post('/logout',authController.logout)
+
 // reset passwor route 
 router.get('/reset-password',authController.resetPasswordPage)
 
@@ -48,9 +50,9 @@ router.post('/reset-password',[
 // forgot password route 
 router.get('/forgot-password',authController.forgotPasswordPage)
 
-router.post('/forgot-password',[
-    check('Email').notEmpty().withMessage('Email cannot be empty').isEmail().withMessage('Invalid format, check it again')
-], authController.forgotPasswordPage)
+router.post('/forgot-password',
+    check('Email', 'Email is required or invalid').notEmpty().isEmail().normalizeEmail()
+, authController.forgotPassword)
 
 
 router.get('/retrieve-password/:token',authController.retrievePasswordPage)
