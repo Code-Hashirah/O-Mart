@@ -77,8 +77,6 @@ bcrypt.hash(Password,12).then(hashedPassword=>{
 }
 // login controller 
 exports.signInPage=(req,res)=>{
-
-
     let userErr=req.flash('loginErrors')
     let userError=req.flash('userErr')
 res.render('pages/login',{title:'Sign-In',loginErr:userErr, validError:userError})
@@ -137,6 +135,12 @@ exports.dashBoard=(req,res)=>{
 //    res.json(user.email)
     res.render('pages/index',{title:'Dashboard',Users:users} )
 }
+
+exports.adminDashBoardPage=(req,res)=>{
+    let users= req.session.user
+    // res.json(users.email)
+     res.render('admin/dashboard',{title:'Admin::Dashboard',Users:users} )
+ }
 
 // reset password middleware 
 exports.resetPasswordPage=(req,res)=>{
@@ -235,7 +239,7 @@ exports.forgotPassword=(req,res)=>{
             return user.save()
         }).then(user=>{
             let email = {
-                to:[user.email,'kabirajibad@yahoo.com'],
+                to: user.email,
                 from:{
                     name:'O-Mart Stores',
                     email: 'info@0-martstores.com.ng'
@@ -256,11 +260,15 @@ exports.forgotPassword=(req,res)=>{
                 }
             })
             transport.sendMail(email).then((respons)=>{
+               res.session.save(()=>{
                 return res.redirect('/sign-in');
+               })
             }).catch(err=>{
                 console.log(err)
             })
+           req.session.save(()=>{
             return res.redirect('/sign-in')
+           })
         })
     })
 }
@@ -284,12 +292,20 @@ exports.retrievePasswordPage=(req, res)=>{
                 res.redirect('/sign-in')
             })
         }
-        return res.render('pages/retrieve-password', {title:"Retrieve Passord", Person:user})
+        return res.render('pages/retrieve-password', {title:"Retrieve Passord", Person:user, urlErr:req.flash('retrievePassword'), Passerr:req.flash('error')})
     })
 }
 
 exports.retrievePassword=(req,res)=>{
         const {Email, NewPassword, ConfirmPassword}=req.body;
+        const errors=validationResult(req);
+        if(!errors.isEmpty()){
+            req.flash('error', errors.array())
+            console.log(errors)
+            return req.session.save(()=>{
+                return res.redirect('/retrieve-password')
+            })
+        }
         User.findOne({
             where:{
                 email:Email

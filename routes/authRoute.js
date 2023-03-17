@@ -2,7 +2,10 @@ const authController=require('../controllers/user/auth');
 const router=require('express').Router();
 const {isEmpty}=require('validator');
 const {check}=require('express-validator/check');
+const isAuth=require('../middleware/isAuth');
+const isAdmin=require('../middleware/isAdmin')
 // Sign up route 
+router.get('/admin-dashboard',authController.adminDashBoardPage)
 router.get('/sign-up',authController.signUpPage)
 router.post('/sign-up',[
     check('Email').notEmpty().withMessage('Your email is required').isEmail().withMessage('Invalid Email').normalizeEmail(),
@@ -27,7 +30,7 @@ router.get('/',authController.dashBoard)
 
 router.post('/logout',authController.logout)
 
-// reset passwor route 
+// reset password route 
 router.get('/reset-password',authController.resetPasswordPage)
 
 router.post('/reset-password',[
@@ -56,6 +59,16 @@ router.post('/forgot-password',
 
 
 router.get('/retrieve-password/:token',authController.retrievePasswordPage)
-router.post('/retrieve-password',authController.retrievePassword)
+router.post('/retrieve-password', [
+    check('NewPassword').notEmpty().withMessage('Do not leave it empty').isAlphanumeric().withMessage('Must contain alphanumeric character').isLength({min:6}).withMessage('Must be at least 6 characters long'),
+    check('ConfirmPassword').custom((value, {req})=>{
+        if(value!==req.body.NewPassword){
+            throw new Error('Password does not match')
+        }
+        return true;
+    })
+],authController.retrievePassword)
+
+
 
 module.exports=router;
