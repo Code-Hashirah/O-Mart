@@ -3,4 +3,6 @@ module.exports=(req,res, next)=>{
         return res.redirect('/')
     }
     next()
+    // res.redirect('/admin-dashboard')
 }
+// 
