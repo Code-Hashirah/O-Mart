@@ -1,12 +1,14 @@
 const productController=require('../controllers/product/product');
 const router=require('express').Router();
-router.get('/admin-add-product',productController.addProductPage);
-router.post('/admin-add-product', productController.addProduct)
+const isAuth=require('../middleware/isAuth');
+const isAdmin=require('../middleware/isAdmin')
+router.get('/admin-add-product', isAuth, isAdmin,productController.addProductPage);
+router.post('/admin-add-product',isAuth, isAdmin, productController.addProduct)
 
-router.get('/admin-manage-product', productController.manageProduct);
+router.get('/admin-manage-product',isAuth, isAdmin, productController.manageProduct);
 
-router.get('/admin-update-product/:id',productController.updateProductPage);
-router.post('/admin-update-product', productController.updateProduct)
+router.get('/admin-update-product/:id',isAuth, isAdmin,productController.updateProductPage);
+router.post('/admin-update-product',isAuth, isAdmin, productController.updateProduct)
 
 
 

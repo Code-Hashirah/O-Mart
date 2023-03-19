@@ -7,16 +7,21 @@ exports.addProductPage=(req,res)=>{
 
 exports.addProduct=(req,res)=>{
     const {Item, Price, Brand, Description, Image, Discount, Category}=req.body;
+    const errors=validationResult(req);
+    let imagepath = req.file.destination + req.file.filename
     Product.create({
         item:Item,
         price:Price,
         brand:Brand,
         description:Description,
-        image:Image,
+        image:imagepath,
         discount:Discount,
         category:Category
+        // userId:req.session.user.id
     }).then(product=>{
        res.redirect('/admin-add-product')
+    }).catch(err=>{
+        console.log(err)
     })
 }
 

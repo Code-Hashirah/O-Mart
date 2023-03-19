@@ -17,6 +17,8 @@
           </li>
         </ul>
         <form class="d-flex text-bg-dark">
+          <% if(! isLoggedIn){ 
+            %>
         <div class="mx-2">
           <a class="nav-link text-bg-dark btn btn-outline-primary" href="/sign-in">Login</a>
         </div>
@@ -24,11 +26,14 @@
         <div class="mx-2">
           <a class="nav-link text-bg-dark btn btn-outline-primary" href="/sign-up">Register reg</a>
         </div>
-
+<% } 
+else{
+%>
           <div class="mx-2">
             <a class="nav-link text-bg-dark btn btn-danger" href="/sign-in">Logout</a>
 
         </div>
+        <% } %>
                 </form>
       </div>
     </div>

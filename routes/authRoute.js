@@ -5,7 +5,7 @@ const {check}=require('express-validator/check');
 const isAuth=require('../middleware/isAuth');
 const isAdmin=require('../middleware/isAdmin')
 // Sign up route 
-router.get('/admin-dashboard', isAuth, isAdmin,authController.adminDashBoardPage)
+router.get('/admin-dashboard',isAuth, isAdmin,authController.adminDashBoardPage)
 router.get('/sign-up',authController.signUpPage)
 router.post('/sign-up',[
     check('Email').notEmpty().withMessage('Your email is required').isEmail().withMessage('Invalid Email').normalizeEmail(),

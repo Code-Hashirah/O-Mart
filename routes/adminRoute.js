@@ -2,6 +2,8 @@ const adminController=require('../controllers/admin/admin');
 const router=require('express').Router();
 const {isEmpty}=require('validator');
 const {check}=require('express-validator');
+const isAuth=require('../middleware/isAuth');
+const isAdmin=require('../middleware/isAdmin')
 
 router.post('/admin-add-user', [
     check('Email').notEmpty().withMessage('Email cannot be left blank').isEmail().withMessage('Invalid Email format').normalizeEmail(),
@@ -13,17 +15,17 @@ router.post('/admin-add-user', [
         return true;
     })
 ],
-adminController.addUser)
+isAuth, isAdmin,adminController.addUser)
 
-router.get('/admin-add-user',adminController.addUserPage)
+router.get('/admin-add-user' ,isAuth, isAdmin,adminController.addUserPage)
 
-router.get('/admin-dashboard',adminController.adminDash)
+router.get('/admin-dashboard' ,isAuth, isAdmin,adminController.adminDash)
 
-router.get('/admin-manage-user', adminController.manageUser)
+router.get('/admin-manage-user',isAuth, isAdmin, adminController.manageUser)
 
-router.post('/admin-delete-user', adminController.deleteUser)
+router.post('/admin-delete-user',isAuth, isAdmin,isAuth, isAdmin,adminController.deleteUser)
 
-router.get('/admin-update-user/:id',adminController.updateUserPage)
-router.post('/admin-update-user',adminController.updateUser)
+router.get('/admin-update-user/:id',isAuth,isAdmin,adminController.updateUserPage)
+router.post('/admin-update-user',isAuth, isAdmin,adminController.updateUser)
 
 module.exports=router;

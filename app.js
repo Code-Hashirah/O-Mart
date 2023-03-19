@@ -4,6 +4,7 @@ const sequelize=require('./database/db');
 const path = require('path');
 const app=express();
 const flash =require('connect-flash');
+const multer = require('multer');
 const User=require('./models/user')
 const Product=require('./models/products')
 const authRoute=require('./routes/authRoute')
@@ -14,9 +15,19 @@ const session =require('express-session')
 const SequelizeStore=require('connect-session-sequelize')(session.Store)
 const Session=require('./models/session')
 // const {validatorResult}=require('express-validator')
-app.set('view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended:true}));
+let storage = multer.diskStorage({
+    destination:(req, file, cb)=>{
+        cb(null, 'public/images')
+    },
+    filename:(req, file, cb)=>{
+        cb(null, Date.now() + "-" + 'picture' + file.originalname)
+    }
+})
+app.use(multer({storage: storage}).single('image'))
+app.set('view engine', 'ejs')
+
 app.use(flash())
 app.use(session({
     secret:'our secret',
@@ -30,15 +41,16 @@ app.use(session({
 
 
 // Page middleware
+app.use((req, res, next)=>{
+    res.locals.isLoggedIn=req.session.isLoggedIn;
+    res.locals.user=req.session.user
+    next()
+})
 app.use(authRoute);
 app.use(AdminRoute);
 app.use(UserRoute);
 app.use(ProductRoute);
-app.use((req, res, next)=>{
-    res.locals.isLoggedIn=req.session.isLoggedIn
-    res.locals.User=req.session.user
-    next()
-})
+
 // Listen to port 
 // User.sync({alter:true})
 sequelize.sync().then(()=>{
